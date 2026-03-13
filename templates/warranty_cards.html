@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Warranty Cards</h3>
+
+<form method="get" class="d-flex" style="max-width:300px;">
+
+<input
+type="text"
+name="invoice"
+class="form-control me-2"
+placeholder="Search Invoice"
+value="{{ request.GET.invoice }}"
+>
+
+<button class="btn btn-primary">
+<i class="bi bi-search"></i>
+</button>
+
+</form>
+
+<table class="table">
+
+{% for c in cards %}
+
+<tr>
+
+<td>{{c.invoice_no}}</td>
+
+<td>{{c.customer_name}}</td>
+
+<td>{{c.customer_phone}}</td>
+
+<td>{{c.printed_at}}</td>
+
+<td>
+
+<a href="/print/{{c.invoice_no}}/" class="btn btn-primary btn-sm">
+
+Print
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

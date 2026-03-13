@@ -1,0 +1,102 @@
+
+
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row g-4">
+
+<div class="col-md-6">
+
+<div class="card dashboard-card p-4">
+
+<h4 class="mb-3">
+<i class="bi bi-camera"></i> Barcode Scanner
+</h4>
+<p>Scan the barcode of the item you want to check warranty details for.</p>
+
+<div id="reader"></div>
+
+<div class="mt-3">
+
+<button id="start-btn" class="btn btn-primary">
+Start Camera
+</button>
+
+<button id="stop-btn" class="btn btn-danger">
+Stop
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-md-6">
+
+<div class="card dashboard-card p-4">
+
+<h4>
+<i class="bi bi-search"></i> Scan or Enter Invoice
+</h4>
+<p>Type the invoice number or scan the barcode to check warranty details.</p>
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="input-group mt-3">
+
+<input type="text"
+class="form-control form-control-lg"
+name="invoice"
+placeholder="Scan barcode or type invoice">
+
+<button class="btn btn-success">
+Search
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let scanner;
+
+function startScanner(){
+
+scanner = new Html5Qrcode("reader");
+
+scanner.start(
+{ facingMode: "environment" },
+{ fps:10, qrbox:250 },
+
+function(decodedText){
+
+document.querySelector("input[name='invoice']").value = decodedText;
+scanner.stop();
+
+}
+
+);
+
+}
+
+function stopScanner(){
+if(scanner){scanner.stop();}
+}
+
+document.getElementById("start-btn").onclick=startScanner;
+document.getElementById("stop-btn").onclick=stopScanner;
+
+</script>
+
+{% endblock %}

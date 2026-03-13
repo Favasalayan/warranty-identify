@@ -1,0 +1,228 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#f2f2f2;
+}
+
+.certificate{
+width:900px;
+margin:auto;
+border:2px solid #000;
+padding:40px;
+background:white;
+margin-top:20px;
+}
+
+.header{
+text-align:center;
+}
+
+.header img{
+width:140px;
+margin-bottom:10px;
+}
+
+.header h1{
+margin:5px;
+font-size:26px;
+}
+
+.subtitle{
+font-size:13px;
+color:#444;
+}
+
+.section-title{
+font-weight:bold;
+margin-top:25px;
+border-bottom:1px solid black;
+padding-bottom:4px;
+}
+
+.details{
+margin-top:15px;
+line-height:28px;
+font-size:15px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+}
+
+.arabic{
+direction:rtl;
+text-align:right;
+}
+
+.terms{
+margin-top:15px;
+font-size:14px;
+line-height:22px;
+text-align:justify;
+}
+
+.footer{
+margin-top:30px;
+font-size:14px;
+}
+
+.thanks{
+margin-top:35px;
+text-align:center;
+font-weight:bold;
+}
+
+@media print {
+
+.no-print{
+display:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body onload="window.print()">
+
+<div class="no-print" style="text-align:center;margin:20px;">
+
+<a href="/" class="btn btn-primary">
+<i class="bi bi-arrow-left"></i> Back to Search
+</a>
+
+</div>
+
+
+{% for i in items %}
+
+<div class="certificate">
+
+<div class="header">
+
+<img src="{% static 'images/housecare_logo.png' %}">
+
+<h1>Warranty Certificate</h1>
+
+<div class="subtitle">
+This document certifies the warranty coverage of the product listed below.
+</div>
+
+</div>
+
+
+<div class="section-title">Customer & Product Details</div>
+
+<div class="details">
+
+<div class="row">
+<div><b>Customer :</b> {{customer_name}}</div>
+</div>
+<div class="row">
+<div><b>Customer Phone :</b> {{customer_phone}}</div>
+</div>
+
+<!-- 
+
+<div class="row">
+<div><b>Item No :</b> {{i.item_no}}</div>
+</div>
+
+-->
+
+<div>
+<b>Item Name :</b> {{i.item}}
+</div>
+<div dir="ltr" style="margin-left:90px;">
+{{i.item_ar}}
+</div>
+
+<div class="row">
+<div><b>Receipt No :</b> {{invoice}}</div>
+</div>
+
+<div class="row">
+<div><b>Transaction Date :</b>{{ i.purchase }}</div>
+</div>
+
+<div class="row">
+<div><b>Warranty Duration :</b> {{i.warranty_months}} Months</div>
+</div>
+
+<div class="row">
+<div><b>Warranty End Date :</b>{{ i.expiry }}</div>
+</div>
+
+<div class="row">
+<div><b>Warranty Provider :</b> {{ i.warranty_provider }}</div>
+</div>
+
+<div class="row">
+<div><b>Salesman Tel :</b> {{i.phone}}</div>
+</div>
+
+</div>
+
+
+<div class="section-title">Warranty Terms</div>
+
+<div class="terms">
+
+This warranty covers manufacturing defects, component failures, and workmanship issues
+under normal usage conditions during the warranty period. This certificate must be
+presented along with the product for any warranty claim.
+
+<br><br>
+
+Damage caused by misuse, accidents, unauthorized repairs, or modifications will void this
+warranty. The company reserves the right to evaluate and determine whether the warranty
+claim is valid.
+
+</div>
+
+
+<div class="footer">
+
+<b>Issued By:</b><br>
+House Care Warranty Services
+
+<br><br>
+
+<b>Issued Date:</b><br>
+{{i.purchase|date:"Y-m-d"}}
+
+</div>
+
+
+<div class="thanks">
+Thank you for choosing House Care. Your satisfaction is our priority.
+</div>
+<div style="text-align:right;margin-top:20px;">
+
+<img src="data:image/png;base64,{{qr}}" width="120">
+
+<br>
+
+<small>Scan to verify warranty</small>
+
+</div>
+
+</div>
+
+<br><br>
+
+{% endfor %}
+
+</body>
+</html>

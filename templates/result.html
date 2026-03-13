@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="mb-3">
+<i class="bi bi-shield-check"></i> Warranty Details
+</h3>
+
+<p class="text-muted">
+Invoice: {{ invoice }}
+</p>
+
+
+
+
+<div class="card card-custom">
+
+<div class="card-body">
+
+<div class="table-responsive">
+
+<table class="table table-hover align-middle">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Item (Arabic)</th>
+<th>Item</th>
+<th>Purchase Date</th>
+<th>Warranty Period</th>
+<th>Warranty Expiry</th>
+<th>Vendor No</th>
+<th>Warranty Provider</th>
+<th>Salesman</th>
+<th>Contact</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for i in items %}
+
+<tr>
+
+<td dir="rtl">{{ i.item }}</td>
+
+<td>{{ i.item_ar }}</td>
+
+<td>{{ i.purchase }}</td>
+
+<td>{{ i.warranty_months }} Months</td>
+
+<td>{{ i.expiry }}</td>
+
+<td>{{ i.vendor_no }}</td>
+
+<td>{{ i.warranty_provider }}</td>
+
+<td>{{ i.salesman }}</td>
+
+<td>{{ i.phone }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<br>
+
+
+<div class="card card-custom p-4">
+
+<h5>
+<i class="bi bi-person"></i> Customer Details
+</h5>
+
+<form method="POST" action="/save_customer/">
+
+{% csrf_token %}
+
+<input type="hidden" name="invoice" value="{{ invoice }}">
+
+<div class="row g-3">
+
+<div class="col-md-4">
+
+<input
+type="text"
+name="customer_name"
+class="form-control"
+placeholder="Customer Name">
+
+</div>
+
+<div class="col-md-4">
+
+<input
+type="text"
+name="customer_phone"
+class="form-control"
+placeholder="Phone Number">
+
+</div>
+
+<div class="col-md-4">
+
+<button class="btn btn-primary">
+<i class="bi bi-save"></i> Save
+</button>
+
+<a href="/print/{{ invoice }}/" class="btn btn-success">
+<i class="bi bi-printer"></i> Print Warranty
+</a>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+{% endblock %}
