@@ -13,7 +13,7 @@ class SearchHistory(models.Model):
 
 class WarrantyCard(models.Model):
 
-    invoice_no = models.CharField(max_length=50)
+    invoice_no = models.CharField(max_length=50, unique=True)
 
     customer_name = models.CharField(max_length=200)
 

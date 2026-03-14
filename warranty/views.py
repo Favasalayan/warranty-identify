@@ -66,11 +66,13 @@ def save_customer(request):
         invoice = request.POST.get("invoice")
         name = request.POST.get("customer_name")
         phone = request.POST.get("customer_phone")
-        
-        WarrantyCard.objects.create(
+
+        WarrantyCard.objects.get_or_create(
             invoice_no=invoice,
-            customer_name=name,
-            customer_phone=phone
+            defaults={
+                "customer_name": name,
+                "customer_phone": phone
+            }
         )
 
         return redirect(f"/print/{invoice}/")

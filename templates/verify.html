@@ -15,34 +15,20 @@
 
 <h3>Warranty Verification</h3>
 
-<p>Invoice: <b>{{invoice}}</b></p>
-
-<table class="table table-bordered">
-
-<tr>
-
-<th>Item</th>
-<th>Expiry Date</th>
-
-<th>Service Provider</th>
-<th>Contact</th>
-
-</tr>
+<p><b>Invoice: {{invoice}}</b></p>
 
 {% for i in items %}
 
-<tr>
+<p><b>Item : </b>{{i.item}}</p>
+<p><b>Expiry Date : </b>{{i.expiry}}</p>
 
-<td>{{i.item}}</td>
+<p><b>Service Provider : </b>{{i.warranty_provider}}</p>
+<p><b>Contact : </b>{{i.phone}}</p>
 
-<td>{{i.expiry}}</td>
 
 
-<td>{{i.warranty_provider}}</td>
 
-<td>{{i.phone}}</td>
 
-</tr>
 
 {% endfor %}
 

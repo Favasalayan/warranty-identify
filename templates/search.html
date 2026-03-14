@@ -47,10 +47,13 @@ Stop
 
 <div class="input-group mt-3">
 
-<input type="text"
-class="form-control form-control-lg"
+<input
+type="text"
 name="invoice"
-placeholder="Scan barcode or type invoice">
+class="form-control form-control-lg"
+placeholder="Scan or type invoice"
+autofocus
+>
 
 <button class="btn btn-success">
 Search
@@ -99,4 +102,22 @@ document.getElementById("stop-btn").onclick=stopScanner;
 
 </script>
 
+<script>
+
+// get invoice input
+const invoiceInput = document.querySelector("input[name='invoice']");
+
+// listen for barcode scanner input
+invoiceInput.addEventListener("keypress", function(e){
+
+    if(e.key === "Enter"){
+
+        e.preventDefault();   // stop page reload
+        this.form.submit();   // submit form automatically
+
+    }
+
+});
+
+</script>
 {% endblock %}
